@@ -3,12 +3,11 @@
 ## I. THÔNG TIN CHUNG
 * **Môn học:** Cấu trúc dữ liệu và Giải thuật (DSA)
 * **Thời gian học:** Học kỳ II, Năm học 2025 - 2026
-* **Họ và tên nhóm sinh viên thực hiện:**
- Đoàn Tấn Phong
- Võ Ngọc Bảo Trân
+* **Nhóm sinh viên thực hiện:**
+ Đoàn Tấn Phong (24120408)
+ Võ Ngọc Bảo Trân (25120450)
 * **Lớp:** 25CTT6
 * **Trường:** Đại học Khoa học Tự nhiên - ĐHQG-HCM (HCMUS)
-* **Mã số sinh viên:** *24120408-25120450*
 
 ---
 
