@@ -51,7 +51,7 @@ Bộ test được thiết kế gồm 5 cases cho mỗi bài toán, nhắm thẳ
 ## IV. LẦN CHẠY THỨ HAI: CẢI TIẾN THUẬT TOÁN VÀ KHẮC PHỤC LỖ HỔNG 
 
 ### 1. Thuật toán cài đặt tốt nhất trong Lần chạy 2
-Đúng như nhóm đã tính toán ở giai đoạn sinh test, bước sang Lần chạy 2, khi tất cả các nhóm tung ra các bộ test nhắm vào nhau, thuật toán **Radix Sort** của nhóm ở Lần 1 đã bộc lộ điểm yếu chí mạng khi xử lý chuỗi. Tại Bài B và Bài C, dưới áp lực của các bộ test có tiền tố chung cực dài (Long Common Prefix) và mảng nghịch thế sâu từ đối thủ, Radix Sort chạy cực kỳ chậm, thậm chí phát sinh lỗi **Runtime Error (RTE)** do tràn bộ nhớ hoặc vượt quá giới hạn đệ quy hệ thống.
+Đúng như nhóm đã tính toán ở giai đoạn sinh test, bước sang Lần chạy 2, khi tất cả các nhóm tung ra các bộ test nhắm vào nhau, thuật toán **Radix Sort** của nhóm ở Lần 1 đã bộc lộ điểm yếu chí mạng khi xử lý chuỗi. Tại Bài B và Bài C, dưới áp lực của các bộ test có tiền tố chung cực dài (Long Common Prefix) và mảng nghịch thế sâu từ các nhóm khác, Radix Sort chạy cực kỳ chậm, thậm chí phát sinh lỗi **Runtime Error (RTE)** do tràn bộ nhớ hoặc vượt quá giới hạn đệ quy hệ thống.
 
 Để lật ngược tình thế, nhóm đã chính thức kích hoạt giải pháp ẩn đã chuẩn bị từ trước: Chuyển đổi toàn bộ kiến trúc sắp xếp chuỗi sang **Sedgewick's Optimized Quicksort**, cụ thể là thuật toán **3-way String Quicksort** kết hợp **Iterative Randomized Quicksort**. 
 
