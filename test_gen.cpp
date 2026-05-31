@@ -1,3 +1,21 @@
+/*
+  test_gen.exe int 1 
+  test_gen.exe int 2 
+  test_gen.exe int 3
+  test_gen.exe int 4 
+  test_gen.exe int 5 
+  test_gen.exe strlexi 1 
+  test_gen.exe strlexi 2 
+  test_gen.exe strlexi 3 
+  test_gen.exe strlexi 4 
+  test_gen.exe strlexi 5  
+  test_gen.exe strlenlexi 1 
+  test_gen.exe strlenlexi 2 
+  test_gen.exe strlenlexi 3 
+  test_gen.exe strlenlexi 4 
+  test_gen.exe strlenlexi 5 
+ */
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -13,14 +31,14 @@ void generate_int_test(int test_id) {
     int n = 100000; // Giới hạn N = 10^5 cho bài A
     cout << n << "\n";
     
-    // Khởi tạo bộ sinh số ngẫu nhiên chuẩn C++11
+    // Khởi tạo bộ sinh số ngẫu nhiên chuẩn 
     random_device rd;
     mt19937 gen(rd()); 
     uniform_int_distribution<long long> dist(-2147483648LL, 2147483647LL);
 
     switch (test_id) {
         case 1: {
-            // Test 1: Cực hạn giá trị âm (Kích hoạt Bug tràn số)
+            // Test 1: Cực hạn giá trị âm 
             // Trộn ngẫu nhiên lượng lớn số -2147483648, 2147483647 và 0
             vector<int> a;
             a.reserve(n);
