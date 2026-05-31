@@ -5,6 +5,7 @@
 * **Thời gian học:** Học kỳ II, Năm học 2025 - 2026
 * **Nhóm sinh viên thực hiện:**
  Đoàn Tấn Phong (24120408)
+
  Võ Ngọc Bảo Trân (25120450)
 * **Lớp:** 25CTT6
 * **Trường:** Đại học Khoa học Tự nhiên - ĐHQG-HCM (HCMUS)
