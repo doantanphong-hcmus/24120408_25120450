@@ -1,4 +1,4 @@
-# BÁO CÁO ĐỒ ÁN THI ĐẤU THUẬT TOÁN SẮP XẾP (DSA BENCHMARK)
+# BÁO CÁO ĐỒ ÁN SORT BENCHMARK
 
 ## I. THÔNG TIN CHUNG
 * **Môn học:** Cấu trúc dữ liệu và Giải thuật (DSA)
