@@ -1,14 +1,12 @@
-# BÁO CÁO ĐỒ ÁN THI ĐẤU THUẬT TOÁN SẮP XẾP (DSA BENCHMARK)
+# BÁO CÁO ĐỒ ÁN SORT BENCHMARK
 
 ## I. THÔNG TIN CHUNG
 * **Môn học:** Cấu trúc dữ liệu và Giải thuật (DSA)
 * **Thời gian học:** Học kỳ II, Năm học 2025 - 2026
-* **Họ và tên nhóm sinh viên thực hiện:**
- Đoàn Tấn Phong
- Võ Ngọc Bảo Trân
+* **Nhóm sinh viên thực hiện:**
+ Đoàn Tấn Phong (24120408)  -  Võ Ngọc Bảo Trân (25120450)
 * **Lớp:** 25CTT6
 * **Trường:** Đại học Khoa học Tự nhiên - ĐHQG-HCM (HCMUS)
-* **Mã số sinh viên:** *24120408-25120450*
 
 ---
 
@@ -18,7 +16,7 @@
 Trong đợt nộp bài đầu tiên, chiến lược của nhóm là phát triển song song hai hướng thuật toán: **Radix Sort** (Thuật toán sắp xếp theo cơ số tuyến tính) và **Sedgewick's Optimized Quicksort** (Quicksort tối ưu hóa cấu trúc phân hoạch). Qua các đợt kiểm thử nghiêm ngặt nội bộ trên cấu hình bộ test tiêu chuẩn do giáo viên cung cấp, nhóm nhận thấy **Radix Sort** mang lại hiệu năng áp đảo tuyệt đối ở cả 3 bài toán. Do đó, nhóm quyết định chốt Radix Sort làm giải pháp nộp chính thức cho Lần chạy 1.
 
 Các phương thức tối ưu hóa cốt lõi được áp dụng bao gồm:
-* **Bài A (Integer Sort):** Áp dụng Radix Sort cơ số 256 với đúng 4 lượt quét (passes) trên kiến trúc số nguyên 32-bit. Để xử lý mảng chứa cả số nguyên âm và số dương mà không làm đảo lộn thứ tự tuyến tính, nhóm sử dụng kỹ thuật thao Bitwise Manipulation: `x ^ 0x80000000`. Phép toán này đảo ngược bit dấu (sign bit), chuyển đổi toàn bộ dải số nguyên có dấu sang dải số nguyên không dấu tương đương một cách tuần tự, giúp Radix Sort phân bổ bucket chính xác tuyệt đối mà không phát sinh chi phí rẽ nhánh `if-else`.
+* **Bài A (Integer Sort):** Áp dụng Radix Sort cơ số 256 với đúng 4 lượt quét (passes) trên kiến trúc số nguyên 32-bit. Để xử lý mảng chứa cả số nguyên âm và số dương mà không làm đảo lộn thứ tự tuyến tính, nhóm sử dụng kỹ thuật thao Bitwise Manipulation: `x ^ 0x80000000`. Phép toán này đảo ngược bit dấu, chuyển đổi toàn bộ dải số nguyên có dấu sang dải số nguyên không dấu tương đương một cách tuần tự, giúp Radix Sort phân bổ bucket chính xác tuyệt đối mà không phát sinh chi phí rẽ nhánh `if-else`.
 * **Bài B & C (String Sort):** Radix Sort được tinh chỉnh cấu trúc bộ nhớ đệm. Tuy nhiên, để đạt tốc độ cực hạn, nhóm đã xây dựng hệ thống **Custom Fast I/O**. Toàn bộ dữ liệu đầu vào được nạp trực tiếp vào một vùng đệm tĩnh khổng lồ (`in_buf`), triệt tiêu hoàn toàn overhead gọi hàm của `std::cin` hay `scanf`. Dữ liệu xuất ra cũng được gom vào `out_buf` trước khi đẩy ra luồng xuất chuẩn bằng `cout.write`.
 
 ### 2. Lý do Radix Sort tối ưu nhất ở Lần chạy 1
@@ -53,24 +51,25 @@ Bộ test được thiết kế gồm 5 cases cho mỗi bài toán, nhắm thẳ
 ## IV. LẦN CHẠY THỨ HAI: CẢI TIẾN THUẬT TOÁN VÀ KHẮC PHỤC LỖ HỔNG 
 
 ### 1. Thuật toán cài đặt tốt nhất trong Lần chạy 2
-Đúng như nhóm đã tính toán ở giai đoạn sinh test, bước sang Lần chạy 2, khi tất cả các nhóm tung ra các bộ test nhắm vào nhau, thuật toán **Radix Sort** của nhóm ở Lần 1 đã bộc lộ điểm yếu chí mạng khi xử lý chuỗi. Tại Bài B và Bài C, dưới áp lực của các bộ test có tiền tố chung cực dài (Long Common Prefix) và mảng nghịch thế sâu từ đối thủ, Radix Sort chạy cực kỳ chậm, thậm chí phát sinh lỗi **Runtime Error (RTE)** do tràn bộ nhớ hoặc vượt quá giới hạn đệ quy hệ thống.
+Đúng như nhóm đã tính toán ở giai đoạn sinh test, bước sang Lần chạy 2, khi tất cả các nhóm tung ra các bộ test nhắm vào nhau, thuật toán **Radix Sort** của nhóm ở Lần 1 đã bộc lộ điểm yếu chí mạng khi xử lý chuỗi. Tại Bài B và Bài C, dưới áp lực của các bộ test có tiền tố chung cực dài và mảng nghịch thế sâu từ các nhóm khác, Radix Sort chạy cực kỳ chậm, thậm chí phát sinh lỗi **Runtime Error** do tràn bộ nhớ hoặc vượt quá giới hạn đệ quy hệ thống.
 
-Để lật ngược tình thế, nhóm đã chính thức kích hoạt giải pháp ẩn đã chuẩn bị từ trước: Chuyển đổi toàn bộ kiến trúc sắp xếp chuỗi sang **Sedgewick's Optimized Quicksort**, cụ thể là thuật toán **3-way String Quicksort** kết hợp **Iterative Randomized Quicksort**. 
+Để lật ngược tình thế, nhóm đã chính thức kích hoạt giải pháp ẩn đã chuẩn bị từ trước: Chuyển đổi toàn bộ kiến trúc sắp xếp chuỗi sang **Sedgewick's Optimized Quicksort**, cụ thể là thuật toán **3-way String Quicksort** kết hợp **Randomized Pivot Quicksort**.
 
 Chiến thuật phân bổ cho từng bài ở Lần 2 như sau:
 * **Bài A (Integer Sort):** Nhóm nhận thấy thuật toán Radix Sort 4 passes kết hợp phép đảo bit dấu ở Lần 1 vẫn hoạt động cực kỳ ổn định, có khả năng chống chịu tốt trước mọi dạng biến động của mảng số nguyên. Tốc độ thực tế so với các nhóm dẫn đầu không chênh lệch đáng kể. Do đó, nhóm quyết định **giữ nguyên mã nguồn Bài A**, không tối ưu thêm để bảo toàn sự ổn định của hệ thống, tập trung toàn lực tài nguyên cho hai bài toán chuỗi ký tự.
-* **Bài B (Lexicographic Sort):** Triển khai thuật toán **3-way String Quicksort** tối ưu theo lý thuyết của Robert Sedgewick. Thuật toán tiến hành phân chia mảng con trỏ thành 3 phần rõ rệt dựa trên ký tự tại độ sâu `depth`: phần nhỏ hơn pivot, phần bằng pivot, và phần lớn hơn pivot. 
-* **Bài C (Length-aware Lexicographic Sort):** Triển khai **Iterative Randomized Quicksort** quản lý bằng ngăn xếp thủ công (`std::stack`), ưu tiên khóa độ dài chuỗi trước rồi mới đến thứ tự từ điển.
+* **Bài B (Lexicographic Sort):** Triển khai thuật toán **3-way String Quicksort** tối ưu theo lý thuyết của Robert Sedgewick. Thuật toán tiến hành phân chia mảng con trỏ thành 3 phần rõ rệt dựa trên ký tự tại độ sâu `depth`: phần nhỏ hơn pivot, phần bằng pivot, và phần lớn hơn pivot. Để chọn chốt (pivot) an toàn và nhanh chóng, nhóm sử dụng kỹ thuật **Median-of-3** (chọn phần tử trung vị của đầu, giữa và cuối mảng).
+* **Bài C (Length-aware Lexicographic Sort):** Triển khai mô hình **Counting Sort theo chiều dài trước**, sử dụng `vector` để phân bổ độ dài. Sau đó, tiến hành gọi **3-way String Quicksort** cục bộ cho từng nhóm chuỗi có cùng độ dài. Khác với Bài B, thuật toán Quicksort ở Bài C được tích hợp thêm **Randomized Pivot** (`fast_rand`) để bẻ gãy hoàn toàn các bộ test cố tình gài bẫy trường hợp xấu nhất.
 
 ### 2. Các phương thức tối ưu nâng cao so với Lần chạy 1
 Để đảm bảo Sedgewick's Quicksort đạt tốc độ vượt trội và bẻ gãy hoàn toàn các bộ test phá hoại từ các nhóm khác, nhóm áp dụng 3 kỹ thuật tối ưu hóa chuyên sâu:
 
 * **Quản lý con trỏ mảng tĩnh và Kỹ thuật Zero-copy:** Thay vì sử dụng kiểu dữ liệu `std::string` nặng nề (vốn liên tục kích hoạt cơ chế cấp phát động và sao chép sâu vùng nhớ), nhóm sử dụng một mảng con trỏ tĩnh `const char* arr[]`. Vùng đệm đầu vào `in_buf` sau khi được đọc toàn bộ bằng Fast I/O sẽ được duyệt qua, nhóm tự động thay thế các khoảng trắng và ký tự xuống dòng bằng ký tự kết thúc chuỗi `\0` (null-terminator). Mảng `arr` chỉ lưu con trỏ trỏ trực tiếp đến địa chỉ vùng nhớ của chuỗi nằm trong `in_buf`. Quá trình sắp xếp thực chất chỉ là hoán đổi vị trí của các con trỏ 8-byte (`swap_ptr`), đạt hiệu suất tiệm cận phần cứng.
-* **Khử đệ quy bằng Stack thủ công (Bảo vệ an toàn hệ thống):** Ở Bài C, để chống lại các bộ test cố tình ép thuật toán rơi vào độ sâu đệ quy cực đại dẫn đến lỗi sập nguồn hệ thống (Stack Overflow / RTE), nhóm loại bỏ hoàn toàn cơ chế gọi hàm đệ quy của kiến trúc máy tính. Thay vào đó, một `std::stack<pair<int, int>>` được duy trì thủ công để quản lý biên độ mảng con `[l, r]`. Cơ chế này chuyển vùng lưu trữ trạng thái từ vùng nhớ Stack giới hạn của hệ điều hành sang vùng nhớ Heap rộng rãi, giúp code hoàn toàn miễn nhiễm với lỗi tràn stack.
-* **Randomized Pivot và Bộ sinh số ngẫu nhiên siêu tốc fast_rand():** Nhóm tích hợp thuật toán chọn phần tử chốt ngẫu nhiên (Randomized Quicksort) để phá vỡ mọi cấu trúc mảng được sắp xếp ý đồ từ trước của các nhóm khác. Để tránh việc hàm `rand()` chuẩn của thư viện làm chậm chương trình do hằng số lớn, nhóm tự cài đặt hàm `fast_rand()` dựa trên thuật toán thao tác bit Xorshift (`unsigned int` liên tục dịch và XOR bit). Hàm này chỉ mất vài chu kỳ xung nhịp để sinh ra một vị trí chốt ngẫu nhiên, giúp triệt tiêu hoàn toàn nguy cơ suy biến về độ phức tạp $O(N^2)$ của Quicksort, đưa thời gian chạy về mức ổn định tối ưu $O(N \log N)$.
+* **Fallback Insertion Sort:** Một kỹ thuật tinh chỉnh quan trọng cho cả Bài B và Bài C là cơ chế Fallback. Khi Quicksort đệ quy chia mảng con xuống kích thước đủ nhỏ ($N \le 16$), thuật toán sẽ tự động cắt nhánh và chuyển sang gọi `final_insertion_sort`. Insertion Sort với hằng số cực nhỏ sẽ giúp dọn dẹp các mảng kích thước bé nhanh hơn rất nhiều so với việc tiếp tục gọi đệ quy Quicksort.
+* **Randomized Pivot và Median-of-3:** Nhóm tích hợp kỹ thuật chọn phần tử chốt thông minh để phá vỡ mọi cấu trúc mảng bị sắp xếp ý đồ từ trước. Tại Bài B, kỹ thuật **Median-of-3** được sử dụng. Tại Bài C, thuật toán dùng sinh số ngẫu nhiên. Để tránh việc hàm `rand()` chuẩn của thư viện làm chậm chương trình, nhóm tự cài đặt hàm `fast_rand()` dựa trên thuật toán thao tác bit Xorshift. Hàm này chỉ mất vài chu kỳ xung nhịp để sinh ra một vị trí chốt, triệt tiêu hoàn toàn nguy cơ suy biến về độ phức tạp $O(N^2)$.
 
 ---
 
 ## V. KẾT LUẬN
-Đồ án thi đấu DSA đã mang lại một góc nhìn thực chiến sâu sắc về tối ưu hóa mã nguồn. Kết quả hai lần chạy chứng minh rằng: không có một thuật toán nào là vạn năng trong mọi hoàn cảnh. **Radix Sort** là vô đối về tốc độ trên dữ liệu đồng đều, ít biến động (như Bài A hoặc mảng chuỗi ngẫu nhiên ở Lần 1), nhưng dễ dàng bị đánh bại bởi các bộ test tiền tố dài tinh vi. Trong khi đó, **Sedgewick's Optimized Quicksort** với cơ chế chọn pivot ngẫu nhiên, phân hoạch 3 hướng và cấu trúc Zero-copy đã chứng minh được sự lì đòn và khả năng bảo vệ hệ thống tuyệt đối trước các đợt tấn công test case ở Lần chạy 2, giúp nhóm tối ưu hóa điểm số và thứ hạng chung cuộc một cách bền vững.
+Đồ án thi đấu DSA đã mang lại một góc nhìn thực chiến sâu sắc về tối ưu hóa mã nguồn. Kết quả hai lần chạy chứng minh rằng: không có một thuật toán nào là vạn năng trong mọi hoàn cảnh. **Radix Sort** là vô đối về tốc độ trên dữ liệu đồng đều, nhưng dễ dàng bị đánh bại bởi các bộ test tiền tố dài. Trong khi đó, **Sedgewick's Optimized Quicksort** với cơ chế chọn pivot thông minh, phân hoạch 3 hướng và cấu trúc Zero-copy đã chứng minh được sự lì đòn và khả năng bảo vệ hệ thống tuyệt đối trước các đợt tấn công test case ở Lần chạy 2, giúp nhóm tối ưu hóa điểm số một cách bền vững.
 
+---
