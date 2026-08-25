@@ -1,7 +1,7 @@
 # BÁO CÁO ĐỒ ÁN SORT BENCHMARK
 
 ## I. THÔNG TIN CHUNG
-* **Môn học:** Cấu trúc dữ liệu và Giải thuật (DSA)
+* **Môn học:** Cấu trúc dữ liệu và Giải thuật 
 * **Thời gian học:** Học kỳ II, Năm học 2025 - 2026
 * **Nhóm sinh viên thực hiện:**
  Đoàn Tấn Phong (24120408)  -  Võ Ngọc Bảo Trân (25120450)
