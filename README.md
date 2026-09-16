@@ -13,7 +13,7 @@
 ## II. LẦN CHẠY THỨ NHẤT: TỐI ƯU HÓA HIỆU NĂNG BAN ĐẦU 
 
 ### 1. Thuật toán cài đặt tốt nhất trong Lần chạy 1
-Trong đợt nộp bài đầu tiên, chiến lược của nhóm là phát triển song song hai hướng thuật toán: **Radix Sort** (Thuật toán sắp xếp theo cơ số tuyến tính) và **Sedgewick's Optimized Quicksort** (Quicksort tối ưu hóa cấu trúc phân hoạch). Qua các đợt kiểm thử nghiêm ngặt nội bộ trên cấu hình bộ test tiêu chuẩn do giáo viên cung cấp, nhóm nhận thấy **Radix Sort** mang lại hiệu năng áp đảo tuyệt đối ở cả 3 bài toán. Do đó, nhóm quyết định chốt Radix Sort làm giải pháp nộp chính thức cho Lần chạy 1.
+Trong đợt nộp bài đầu tiên, chiến lược của nhóm là phát triển song song hai hướng thuật toán: **Radix Sort** và **Sedgewick's Optimized Quicksort** (Quicksort tối ưu hóa cấu trúc phân hoạch). Qua các đợt kiểm thử nghiêm ngặt nội bộ trên cấu hình bộ test tiêu chuẩn do giáo viên cung cấp, nhóm nhận thấy **Radix Sort** mang lại hiệu năng áp đảo tuyệt đối ở cả 3 bài toán. Do đó, nhóm quyết định chốt Radix Sort làm giải pháp nộp chính thức cho Lần chạy 1.
 
 Các phương thức tối ưu hóa cốt lõi được áp dụng bao gồm:
 * **Bài A (Integer Sort):** Áp dụng Radix Sort cơ số 256 với đúng 4 lượt quét (passes) trên kiến trúc số nguyên 32-bit. Để xử lý mảng chứa cả số nguyên âm và số dương mà không làm đảo lộn thứ tự tuyến tính, nhóm sử dụng kỹ thuật thao Bitwise Manipulation: `x ^ 0x80000000`. Phép toán này đảo ngược bit dấu, chuyển đổi toàn bộ dải số nguyên có dấu sang dải số nguyên không dấu tương đương một cách tuần tự, giúp Radix Sort phân bổ bucket chính xác tuyệt đối mà không phát sinh chi phí rẽ nhánh `if-else`.
